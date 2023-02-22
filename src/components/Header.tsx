@@ -16,6 +16,10 @@ import logo from "../logo.png";
 
 export default function Header() {
   const { data, isLoading } = useQuery(["comics"], listComics);
+
+  const pathName = window.location.pathname.split("/")[1];
+  console.log(pathName);
+
   return (
     <Box
       bg="gray.100"
@@ -45,16 +49,20 @@ export default function Header() {
           spacing={"10"}
         >
           <Link to="/">
-            <Heading size={"2xs"} color="#666" _hover={{ color: "#FFFFFF" }}>
+            <Heading
+              size={"2xs"}
+              color={pathName === "" ? "#FFFFFF" : "#666"}
+              _hover={{ color: "#FFFFFF" }}
+            >
               HOME
             </Heading>
           </Link>
-          <Link to="/">
+          <Link to="/comics">
             <Popover trigger="hover" closeOnBlur>
               <PopoverTrigger>
                 <Heading
                   size={"2xs"}
-                  color="#666"
+                  color={pathName === "comics" ? "#FFFFFF" : "#666"}
                   _hover={{ color: "#FFFFFF" }}
                 >
                   COMICS
@@ -102,8 +110,12 @@ export default function Header() {
               </PopoverContent>
             </Popover>
           </Link>
-          <Link to="/">
-            <Heading size={"2xs"} color="#666" _hover={{ color: "#FFFFFF" }}>
+          <Link to="/characters">
+            <Heading
+              size={"2xs"}
+              color={pathName === "characters" ? "#FFFFFF" : "#666"}
+              _hover={{ color: "#FFFFFF" }}
+            >
               CHARACTERS
             </Heading>
           </Link>
