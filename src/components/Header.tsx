@@ -9,10 +9,13 @@ import {
   PopoverTrigger,
   VStack,
 } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { listComics } from "../api";
 import logo from "../logo.png";
 
 export default function Header() {
+  const { data, isLoading } = useQuery(["comics"], listComics);
   return (
     <Box
       bg="gray.100"
@@ -47,7 +50,7 @@ export default function Header() {
             </Heading>
           </Link>
           <Link to="/">
-            <Popover>
+            <Popover trigger="hover" closeOnBlur>
               <PopoverTrigger>
                 <Heading
                   size={"2xs"}
@@ -62,16 +65,39 @@ export default function Header() {
                 borderColor={"black"}
                 borderWidth={"0"}
                 borderRadius={"0"}
-                // width={"100%"}
                 outline={"none"}
-                height={"480px"}
-                minW={{ base: "100%", lg: "max-content" }}
+                height={"450px"}
+                w={{ base: "500px", lg: "1800px" }}
               >
-                <PopoverBody
-                  bgColor={"red.300"}
-                  minW={{ base: "100%", lg: "max-content" }}
-                >
-                  <Heading>sdsds</Heading>
+                <PopoverBody>
+                  <VStack justifyContent={"center"}>
+                    <Heading color={"black"} fontSize={"3xl"} my={"10"}>
+                      Marvel Comics
+                    </Heading>
+                    <HStack>
+                      {[0, 1, 2, 3, 4, 5].map((item, index) => {
+                        return (
+                          <Box key={item}>
+                            <Image
+                              width={130}
+                              height={200}
+                              src={
+                                data?.data.results[index].thumbnail.path +
+                                "." +
+                                data?.data.results[index].thumbnail.extension
+                              }
+                              alt={data?.data.results[index].title}
+                              boxShadow={"xl"}
+                              mb={"5"}
+                            />
+                            <Heading size={"2xs"} noOfLines={0}>
+                              {data?.data.results[index].title}
+                            </Heading>
+                          </Box>
+                        );
+                      })}
+                    </HStack>
+                  </VStack>
                 </PopoverBody>
               </PopoverContent>
             </Popover>

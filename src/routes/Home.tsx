@@ -5,25 +5,15 @@ import {
   Heading,
   HStack,
   Image,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
   VStack,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 import { listComics } from "../api";
 
 export default function Home() {
   const { data, isLoading } = useQuery(["comics"], listComics);
 
-  console.log(data);
   console.log(isLoading);
-
   console.log(data?.data.results.length);
   return (
     <Box w={"100%"}>
