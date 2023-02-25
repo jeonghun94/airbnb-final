@@ -13,8 +13,6 @@ import { listComics } from "../api";
 export default function Home() {
   const { data, isLoading } = useQuery(["comics"], listComics);
 
-  console.log(isLoading);
-  console.log(data?.data.results.length);
   return (
     <Box w={"100%"}>
       <HStack
@@ -221,7 +219,6 @@ export default function Home() {
             <Box placeSelf={"flex-start"} fontSize={"5xl"}>
               <Heading color="#FFFFFF">Ant-Man Episodes Available Now</Heading>
             </Box>
-
             <Box placeSelf={"flex-start"}>
               <Heading fontSize={"sm"} color="#FFFFFF">
                 Get to know Ant-Man, The Wasp, Hank Pym and Janet Van Dyne ahead
@@ -244,20 +241,6 @@ export default function Home() {
           </VStack>
         </Box>
       </HStack>
-      {/* <Grid gridTemplateColumns={"1fr 1fr"}>
-        {data?.data.results.map((comic: any) => (
-          <Box key={comic.id}>
-            <Image
-              width={210}
-              height={280}
-              src={comic.thumbnail.path + "." + comic.thumbnail.extension}
-              alt={comic.title}
-            />
-            <Heading size={"md"}>{comic.title}</Heading>
-          </Box>
-        ))}
-        <h1>{data?.data.results.length}</h1>
-      </Grid> */}
     </Box>
   );
 }
