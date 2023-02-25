@@ -1,10 +1,17 @@
 import { Box, Grid, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { listCharacters } from "../../api";
+import { useStore } from "../../zustand";
 
 export default function Characters() {
   const { data, isLoading } = useQuery(["comics"], listCharacters);
+  const { setPath } = useStore();
+
+  useEffect(() => {
+    setPath("characters");
+  }, []);
 
   const charactersHeaderData = [
     {

@@ -11,10 +11,10 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import logo from "../logo.png";
-import { useThemeStore } from "../zustand";
+import { useStore } from "../zustand";
 import { Helmet } from "react-helmet";
 export default function Header() {
-  const { path, setPath } = useThemeStore();
+  const { path, setPath } = useStore();
   const comicsHeaderData = [
     {
       title: "Immoral X-Men (2023) #1",
@@ -106,11 +106,11 @@ export default function Header() {
           height={"40px"}
           spacing={"10"}
         >
-          <Link to="/" onClick={() => setPath("")}>
+          <Link to="/">
             <Heading
               size={"2xs"}
-              color={"" === path ? "#FFFFFF" : "#666"}
-              // color={"#666"}
+              marginLeft={"10"}
+              color={path === "/" ? "#FFFFFF" : "#666"}
               _hover={{ color: "#FFFFFF" }}
             >
               HOME
@@ -122,10 +122,9 @@ export default function Header() {
               <Heading
                 size={"2xs"}
                 color={path === "comics" ? "#FFFFFF" : "#666"}
-                // color={pathName === "comics" ? "#FFFFFF" : "#666"}
                 _hover={{ color: "#FFFFFF" }}
               >
-                COMICS
+                <Link to="/comics">COMICS</Link>
               </Heading>
             </PopoverTrigger>
             <PopoverContent
@@ -197,7 +196,7 @@ export default function Header() {
                 color={path === "characters" ? "#FFFFFF" : "#666"}
                 _hover={{ color: "#FFFFFF" }}
               >
-                CHARACTERS
+                <Link to="/characters">CHARACTERS</Link>
               </Heading>
             </PopoverTrigger>
             <PopoverContent
@@ -209,7 +208,7 @@ export default function Header() {
               height={"500px"}
               w={{ base: "500px", lg: "1800px" }}
             >
-              <PopoverBody onClick={() => setPath("characters")}>
+              <PopoverBody>
                 <Link to="/characters">
                   <VStack justifyContent={"center"}>
                     <Heading color={"black"} fontSize={"3xl"} my={5}>

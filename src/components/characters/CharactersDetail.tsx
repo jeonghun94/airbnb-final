@@ -1,11 +1,19 @@
 import { Box, Grid, Heading, Image, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { characterDetail } from "../../api";
+import { useStore } from "../../zustand";
 
 export default function CharactersDetail() {
   const { id } = useParams();
   const { data, isLoading } = useQuery(["comics", id], characterDetail);
+  const { setPath } = useStore();
+
+  useEffect(() => {
+    setPath("characters");
+  }, []);
+
   return isLoading ? (
     <Text>Loading...</Text>
   ) : (

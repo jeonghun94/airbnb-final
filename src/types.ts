@@ -4,6 +4,7 @@ export interface Thumbnail {
 }
 
 export interface Item {
+  role: string;
   resourceURI: string;
   name: string;
 }

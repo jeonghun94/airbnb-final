@@ -9,10 +9,17 @@ import {
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { useStore } from "../../zustand";
 import { listComics } from "../../api";
+import { useEffect } from "react";
 
 export default function Comics() {
   const { data, isLoading } = useQuery(["comics"], listComics);
+  const { setPath } = useStore();
+
+  useEffect(() => {
+    setPath("comics");
+  }, []);
 
   return isLoading ? (
     <Text>Loading...</Text>

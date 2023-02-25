@@ -7,8 +7,16 @@ import {
   Image,
   VStack,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useStore } from "../zustand";
 
 export default function Home() {
+  const { setPath } = useStore();
+
+  useEffect(() => {
+    setPath("/");
+  }, []);
+
   return (
     <Box w={"100%"}>
       <HStack

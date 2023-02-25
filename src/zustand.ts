@@ -5,7 +5,7 @@ type State = {
   setPath: (path: string) => void;
 };
 
-export const useThemeStore = create<State>((set) => ({
+export const useStore = create<State>((set) => ({
   path: "",
   setPath: (path: string) => set({ path }),
 }));
