@@ -8,21 +8,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
-import { once } from "events";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { listComics } from "../../api";
 
 export default function Comics() {
   const { data, isLoading } = useQuery(["comics"], listComics);
-
-  // make function window onload  click on the button
-
-  document.querySelector("body")?.addEventListener("click", () => {
-    console.log("clicked");
-  });
-
-  useEffect(() => {}, []);
 
   return isLoading ? (
     <Text>Loading...</Text>

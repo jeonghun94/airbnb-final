@@ -1,15 +1,7 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Heading,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Grid, Heading, Image, Text, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { listCharacters, listComics } from "../../api";
+import { listCharacters } from "../../api";
 
 export default function Characters() {
   const { data, isLoading } = useQuery(["comics"], listCharacters);

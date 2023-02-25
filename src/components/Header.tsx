@@ -1,6 +1,5 @@
 import {
   Box,
-  CloseButton,
   Heading,
   HStack,
   Image,
@@ -15,8 +14,6 @@ import logo from "../logo.png";
 import { useThemeStore } from "../zustand";
 import { Helmet } from "react-helmet";
 export default function Header() {
-  const pathName = window.location.pathname.split("/")[1];
-
   const { path, setPath } = useThemeStore();
   const comicsHeaderData = [
     {

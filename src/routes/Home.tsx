@@ -7,12 +7,8 @@ import {
   Image,
   VStack,
 } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
-import { listComics } from "../api";
 
 export default function Home() {
-  const { data, isLoading } = useQuery(["comics"], listComics);
-
   return (
     <Box w={"100%"}>
       <HStack
