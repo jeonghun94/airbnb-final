@@ -8,6 +8,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useStore } from "../zustand";
 
 export default function Home() {
@@ -15,7 +16,7 @@ export default function Home() {
 
   useEffect(() => {
     setPath("/");
-  }, []);
+  }, [setPath]);
 
   return (
     <Box w={"100%"}>
@@ -29,9 +30,15 @@ export default function Home() {
         bgColor={"#151515"}
       >
         <Box display={"flex"} alignItems={"center"} gap={3}>
-          <Heading fontSize={"xs"} color="#FFFFFF">
-            STREAM BLACK PANTHER: WAKANDA FOREVER EXCLUSIVELY ON
-          </Heading>
+          <Link
+            to={
+              "https://www.disneyplus.com/movies/black-panther-wakanda-forever/7MAONYZ92wDT?cid=DTCI-Synergy-Marvel-Site-Acquisition-Library-US-Marvel-BlackPantherWakandaForever-EN-NavPipe-Marvel_NavPipe_BlackPantherWakandaForever-NA"
+            }
+          >
+            <Heading fontSize={"xs"} color="#FFFFFF">
+              STREAM BLACK PANTHER: WAKANDA FOREVER EXCLUSIVELY ON
+            </Heading>
+          </Link>
           <Image
             width={55}
             height={"10"}
@@ -76,26 +83,38 @@ export default function Home() {
             </Box>
 
             <Box display={"flex"} placeSelf={"flex-start"} gap={5}>
-              <Button
-                px={10}
-                py={6}
-                mt={5}
-                color={"#FFFFFF"}
-                bgColor={"#EC1C23"}
-                borderRadius={"0px"}
+              <Link
+                to={
+                  "https://www.fandango.com/ant-man-and-the-wasp-quantumania-2023-228957/movie-overview"
+                }
               >
-                Get Tickets
-              </Button>
-              <Button
-                px={10}
-                py={6}
-                mt={5}
-                color={"#FFFFFF"}
-                bgColor={"#EC1C23"}
-                borderRadius={"0px"}
+                <Button
+                  px={10}
+                  py={6}
+                  mt={5}
+                  color={"#FFFFFF"}
+                  bgColor={"#EC1C23"}
+                  borderRadius={"0px"}
+                >
+                  Get Tickets
+                </Button>
+              </Link>
+              <Link
+                to={
+                  "https://www.marvel.com/movies/ant-man-and-the-wasp-quantumania"
+                }
               >
-                Learn More
-              </Button>
+                <Button
+                  px={10}
+                  py={6}
+                  mt={5}
+                  color={"#FFFFFF"}
+                  bgColor={"#EC1C23"}
+                  borderRadius={"0px"}
+                >
+                  Learn More
+                </Button>
+              </Link>
             </Box>
           </VStack>
         </Box>
@@ -231,16 +250,22 @@ export default function Home() {
             </Box>
 
             <Box placeSelf={"flex-start"}>
-              <Button
-                px={10}
-                py={6}
-                mt={5}
-                color={"#FFFFFF"}
-                bgColor={"#EC1C23"}
-                borderRadius={"0px"}
+              <Link
+                to={
+                  "https://www.marvel.com/movies/ant-man-and-the-wasp-quantumania"
+                }
               >
-                Watch Now
-              </Button>
+                <Button
+                  px={10}
+                  py={6}
+                  mt={5}
+                  color={"#FFFFFF"}
+                  bgColor={"#EC1C23"}
+                  borderRadius={"0px"}
+                >
+                  Watch Now
+                </Button>
+              </Link>
             </Box>
           </VStack>
         </Box>

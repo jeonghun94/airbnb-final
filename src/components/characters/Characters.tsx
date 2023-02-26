@@ -1,17 +1,22 @@
-import { Box, Grid, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import { Box, Grid, Heading, Image, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { listCharacters } from "../../api";
+import { CharactersResponse } from "../../types";
 import { useStore } from "../../zustand";
+import Loader from "../Loader";
 
 export default function Characters() {
-  const { data, isLoading } = useQuery(["comics"], listCharacters);
+  const { data, isLoading } = useQuery<CharactersResponse>(
+    ["comics"],
+    listCharacters
+  );
   const { setPath } = useStore();
 
   useEffect(() => {
     setPath("characters");
-  }, []);
+  }, [setPath]);
 
   const charactersHeaderData = [
     {
@@ -42,7 +47,7 @@ export default function Characters() {
   ];
 
   return isLoading ? (
-    <Text>Loading...</Text>
+    <Loader />
   ) : (
     <>
       <Box width="100%" height={"auto"} position={"relative"}>
@@ -76,51 +81,6 @@ export default function Characters() {
       </Box>
 
       <Box p={"2% 20%"}>
-        <Heading as={"h1"} size={"lg"} mb={10}>
-          FEATURED CHARACTERS
-        </Heading>
-
-        <Grid gridTemplateColumns={"repeat(6, 1fr)"} gap={3}>
-          {charactersHeaderData.map((item: any, index) => {
-            return (
-              <VStack
-                key={index}
-                width={180}
-                height={380}
-                role="group"
-                overflow={"hidden"}
-              >
-                <Image
-                  width={"100%"}
-                  height={"175px"}
-                  src={item.src}
-                  alt={item.name}
-                  _hover={{
-                    cursor: "pointer",
-                    transform: "scale(1.02)",
-                    transition: "all 0.3s ease-in-out",
-                  }}
-                  borderBottom={"5px solid #ED1C24"}
-                  marginBottom={"-10px"}
-                />
-                <Box
-                  width={"100%"}
-                  height={"175px"}
-                  backgroundColor={"black"}
-                  p={3}
-                  _groupHover={{
-                    backgroundColor: "#ED1C24",
-                  }}
-                >
-                  <Heading size={"sm"} color={"white"} noOfLines={2}>
-                    {item.name}
-                  </Heading>
-                </Box>
-              </VStack>
-            );
-          })}
-        </Grid>
-
         <Heading as={"h1"} size={"lg"} mb={10}>
           MARVEL CHARACTERS LIST
         </Heading>
@@ -164,6 +124,51 @@ export default function Characters() {
                   </Box>
                 </VStack>
               </Link>
+            );
+          })}
+        </Grid>
+
+        <Heading as={"h1"} size={"lg"} mb={10}>
+          FEATURED CHARACTERS
+        </Heading>
+
+        <Grid gridTemplateColumns={"repeat(6, 1fr)"} gap={3}>
+          {charactersHeaderData.map((item: any, index) => {
+            return (
+              <VStack
+                key={index}
+                width={180}
+                height={380}
+                role="group"
+                overflow={"hidden"}
+              >
+                <Image
+                  width={"100%"}
+                  height={"175px"}
+                  src={item.src}
+                  alt={item.name}
+                  _hover={{
+                    cursor: "pointer",
+                    transform: "scale(1.02)",
+                    transition: "all 0.3s ease-in-out",
+                  }}
+                  borderBottom={"5px solid #ED1C24"}
+                  marginBottom={"-10px"}
+                />
+                <Box
+                  width={"100%"}
+                  height={"175px"}
+                  backgroundColor={"black"}
+                  p={3}
+                  _groupHover={{
+                    backgroundColor: "#ED1C24",
+                  }}
+                >
+                  <Heading size={"sm"} color={"white"} noOfLines={2}>
+                    {item.name}
+                  </Heading>
+                </Box>
+              </VStack>
             );
           })}
         </Grid>

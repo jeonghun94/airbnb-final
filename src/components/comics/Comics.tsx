@@ -1,28 +1,22 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Heading,
-  Image,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Grid, Heading, Image, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { useStore } from "../../zustand";
 import { listComics } from "../../api";
 import { useEffect } from "react";
+import Loader from "../Loader";
+import { ComicsResponse } from "../../types";
 
 export default function Comics() {
-  const { data, isLoading } = useQuery(["comics"], listComics);
+  const { data, isLoading } = useQuery<ComicsResponse>(["comics"], listComics);
   const { setPath } = useStore();
 
   useEffect(() => {
     setPath("comics");
-  }, []);
+  }, [setPath]);
 
   return isLoading ? (
-    <Text>Loading...</Text>
+    <Loader />
   ) : (
     <>
       <VStack>

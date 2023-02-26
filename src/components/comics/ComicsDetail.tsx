@@ -11,20 +11,25 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { comicDetail } from "../../api";
+import { ComicDetailResponse } from "../../types";
 import { useStore } from "../../zustand";
+import Loader from "../Loader";
 
 export default function ComicsDetail() {
   const { id } = useParams();
-  const { data, isLoading } = useQuery(["comics", id], comicDetail);
+  const { data, isLoading } = useQuery<ComicDetailResponse>(
+    ["comics", id],
+    comicDetail
+  );
   const result = data?.data.results[0];
   const { setPath } = useStore();
 
   useEffect(() => {
     setPath("comics");
-  }, []);
+  }, [setPath]);
 
   return isLoading ? (
-    <Text>Loading...</Text>
+    <Loader />
   ) : (
     <Box position={"relative"}>
       <Box
