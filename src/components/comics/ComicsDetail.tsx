@@ -10,8 +10,8 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { comicDetail } from "../../api";
-import { ComicDetailResponse } from "../../types";
+import { comicDetail, listComicCharacters } from "../../api";
+import { CharactersResponse, ComicDetailResponse } from "../../types";
 import { useStore } from "../../zustand";
 import Loader from "../Loader";
 
@@ -21,6 +21,9 @@ export default function ComicsDetail() {
     ["comics", id],
     comicDetail
   );
+  const { data: chractersData, isLoading: chractersLoading } =
+    useQuery<CharactersResponse>(["comicsCharacters", id], listComicCharacters);
+  const characters = chractersData?.data.results;
   const result = data?.data.results[0];
   const { setPath } = useStore();
 
@@ -28,7 +31,7 @@ export default function ComicsDetail() {
     setPath("comics");
   }, [setPath]);
 
-  return isLoading ? (
+  return isLoading || chractersLoading ? (
     <Loader />
   ) : (
     <Box position={"relative"}>
@@ -70,7 +73,7 @@ export default function ComicsDetail() {
         h={"90vh"}
         bgColor={"#000000"}
         opacity={"0.9"}
-        p={"0% 17%"}
+        p={"0% 10%"}
       >
         <HStack w={"100%"} alignItems={"flex-start"} gap={12} py={12}>
           <Image
@@ -131,6 +134,36 @@ export default function ComicsDetail() {
               </Box>
             </Box>
           </VStack>
+          {Number(characters?.length) > 0 && (
+            <Grid gridTemplateColumns={"repeat(4, 1fr)"} gap={3}>
+              {chractersData?.data.results.map((item) => {
+                return (
+                  <VStack
+                    w={"100%"}
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={3}
+                    py={2}
+                  >
+                    <Image
+                      w={"80px"}
+                      h={"80px"}
+                      borderRadius={"full"}
+                      src={item.thumbnail.path + "." + item.thumbnail.extension}
+                    />
+                    <Heading
+                      as={"h2"}
+                      size={"xs"}
+                      noOfLines={1}
+                      color={"white"}
+                    >
+                      {item.name}
+                    </Heading>
+                  </VStack>
+                );
+              })}
+            </Grid>
+          )}
         </HStack>
       </Box>
     </Box>
